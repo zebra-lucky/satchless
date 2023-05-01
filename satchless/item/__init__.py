@@ -15,7 +15,7 @@ class InsufficientStock(Exception):
         self.item = item
 
 
-class ItemRange(object):
+class ItemRange:
     """
     Represents a group of products like a product with multiple variants
     """
@@ -33,7 +33,7 @@ class ItemRange(object):
         return PriceRange(min(prices), max(prices))
 
 
-class ItemSet(object):
+class ItemSet:
     """
     Represents a set of products like an order or a basket
     """
@@ -56,7 +56,7 @@ class ItemList(list, ItemSet):
         return 'ItemList(%s)' % (super(ItemList, self).__repr__(),)
 
 
-class ItemLine(object):
+class ItemLine:
     """
     Represents a single line of an order or basket
     """
@@ -73,7 +73,7 @@ class ItemLine(object):
         return self.get_price_per_item(**kwargs) * self.get_quantity(**kwargs)
 
 
-class Item(object):
+class Item:
     """
     Stands for a single product or a single product variant (ie. White XL
     shirt)
@@ -98,7 +98,7 @@ class Partitioner(ItemSet):
         'Override this method to provide custom partitioning'
         yield ItemList(list(self.subject))
 
-    def __nonzero__(self):
+    def __bool__(self):
         return bool(self.subject)
 
     def __repr__(self):
